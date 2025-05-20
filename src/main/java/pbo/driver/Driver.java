@@ -31,8 +31,17 @@ public class Driver {
 
     public void addStudent(String[] data){
         entityManager.getTransaction().begin();
-        Student student = new Student(data[1], data[2], data[3]);
-        entityManager.persist(student);
+        Student tempStudent;
+        if((tempStudent = entityManager.find(Student.class, data[1])) == null){
+            Student student = new Student(data[1], data[2], data[3]);
+            entityManager.persist(student);
+        }
+        else{
+            if(!tempStudent.getNim().equals(data[1])){
+                Student student = new Student(data[1], data[2], data[3]);
+                entityManager.persist(student);
+            }
+        }
         entityManager.getTransaction().commit();
     }
 
@@ -47,8 +56,16 @@ public class Driver {
 
     public void addCourse(String[] data){
         entityManager.getTransaction().begin();
-        Course course = new Course(data[1], data[2], data[3], Integer.parseInt(data[4]));
-        entityManager.persist(course);
+        Course tempCourse;
+        if((tempCourse = entityManager.find(Course.class, data[1])) == null){
+            Course courses = new Course(data[1], data[2], data[3], Integer.parseInt(data[4]));
+            entityManager.persist(courses);
+        }else{
+            if(!tempCourse.getKode().equals(data[1])){
+                Course courses = new Course(data[1], data[2], data[3], Integer.parseInt(data[4]));
+                entityManager.persist(courses);
+            }
+        }
         entityManager.getTransaction().commit();
     }
 
