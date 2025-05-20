@@ -38,7 +38,7 @@ public class Driver {
 
 
     public void studentall(){
-        String query = "SELECT s FROM Student s";
+        String query = "SELECT s FROM Student s ORDER BY s.nim asc";
         List<Student> students = entityManager.createQuery(query, Student.class).getResultList();
         for(Student s : students){
             System.out.println(s);
